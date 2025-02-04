@@ -44,3 +44,9 @@ Comparar el valor x de la pelota con el de la paleta, si es menr al de la paleta
 ### Registro de puntaje: 
 Cada vez que el valor de x de la pelota sea igual al de la paleta y el valor y este en el intervalo en el que está la paleta se suma un punto al puntaje, cada vez que esto ocurre se compara el número del puntaje con el del puntaje máximo, y en caso de que el puntaje máximo sea menor este se sobreescribe con el puntaje actual.
 
+
+
+## plan de trabajo acordado con el profesor 
+
+# semana 1
+1. diseño driver pantalla ili9341 se recomienda usar lo trabajado de los  grupos de 2024-1
