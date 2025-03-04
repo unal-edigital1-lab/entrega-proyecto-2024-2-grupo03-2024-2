@@ -47,16 +47,22 @@ En el estado INIT se inicializarán las variables del sistema, los jugadores no 
 
 # Arquitectura inicial:
 A continuación se va a mostrar una idea preliminar de los datos y formas en las que se cumplirán las funciones mencionadas previamente:
+
+
 ## Datos constantes: 
-Tamaño xy de la pantalla, 0 en xy, posición x de la paleta, puntaje inicial, posición xy inicial de la pelota, definición de tamaño xy de los muros, definición de forma de la pelota, definición de forma de la paleta, definición de forma de los muros, velocidad xy inicial de la pelota, caracteres ASCII 0-9, A-Z, valores RGB de todos los elemento gráficos.
+Tamaño xy de la pantalla, 0 en xy, posición x de la paleta, puntaje inicial, posición xy inicial de la pelota, definición de tamaño xy de los muros, definición de forma de la pelota, definición de forma de la paleta, definición de forma de los muros, velocidad xy inicial de la pelota, valores RGB111 de todos los elemento gráficos.
 ## Datos variables: 
-Posición en xy de la pelota, posición y de la paleta, dirección xy de la pelota, velocidad xy de la pelota, puntaje actual, puntaje más alto, número de vidas.
- Funciones/módulos": Sumadores, restadores, divisores, comparadores, reloj interno, preservación de datos en memoria.
-Descripción de operación:
+Posición en xy de la pelota, posición y de la paleta, dirección xy de la pelota, velocidad xy de la pelota, puntaje actual
+
+## Descripción de operación:
+
 ### Inicio y reinicio: 
 Se reescriben todos los datos variables a unos valores predeterminados.
+
 ### Operación: 
 El periférico de los botones da 2 señales de entrada, cada vez que uno de los botones se presione se le suma o resta al valor de posición y de la paleta, cambiando su posición en la pantalla, el valor estara limitado a un intervalo entre 0 y el largo de la pantalla menos el largo de la paleta.
+
+
 ## Comportamiento independiente:
 ### Rebote de la pelota: 
 Hay 2 componentes en la velocidad de la pelota, los cuales cambian segun la magnitud de la velocidad y el valor de la direccion, el valor de la direccion determina si el valor de la velocidad de la pelota es sumado o restado de la posición xy actual.
