@@ -451,6 +451,8 @@ A continuación se muestra el código de la máquina de estados descrita anterio
 ````
 
 ## Módulo antirrebote
+El módulo debounce implementa un filtro antirrebote para las señales de entrada de los botones, lo que garantiza que las transiciones en la señal de entrada sean estables antes de ser reflejadas en la salida. Primero, se emplea un mecanismo de sincrinazción basado en os registros sync_0 y sync_1, los cuales alinean la señal de entrada con el rel9oj del sistema. Se usa un contador de 17 bits cnt para medir la duración de los cambios en la señal por lo que si la señal permanece estable durante el tiempo que cnt alcanza su máximo valor la salida se actualiza con el nuevo estado de la señal. Si la señal vuelve a su estado anterior antes de que el contador alance su máximo, el contador se reinicia y no modifica la salida, evitando así el rebote.
+
 
 ```` verilog
 module debounce (
