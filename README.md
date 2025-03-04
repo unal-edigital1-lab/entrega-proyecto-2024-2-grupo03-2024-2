@@ -399,4 +399,28 @@ Finalmente, se muestra el llamado del módulo en el archivo top y la lógica de 
 		 .text_y(TEXT_Y),
 		 .pixel(press_start_pixel)
 	);
- 
+````
+
+## Máquina de estados
+
+A continuación se muestra el código de la máquina de estados descrita anteriormente:
+
+```` verilog
+// Maquina de estados
+    enum {INIT, IDLE, START, PLAY, POINT_END} state, state_next;
+    always_comb begin
+        case(state)
+            INIT: state_next = IDLE;
+            IDLE: state_next = (sig_ctrl) ? START : IDLE;
+            START: state_next = (sig_ctrl) ? PLAY : START;
+            PLAY: state_next = (lft_col || rgt_col) ? POINT_END : PLAY;
+            POINT_END: state_next = (sig_ctrl) ? START : POINT_END;
+            default: state_next = IDLE;
+        endcase
+    end
+
+    always_ff @(posedge clk_pix) begin
+        state <= state_next;
+    end
+
+````
