@@ -536,4 +536,4 @@ Insertar foto del circuito completo
 * A la hora de trabajar con pixeles, se debe ser muy preciso con las operaciones que se realizan, además de manejar las impedancias con cuidado ya que pueden generar bugs visuales, como pixeles parpadeantes donde deberían estar apagados y similares.
 * Se diseño un algoritmo eficiente y simple para detectar las colisiones de la bola, demostrando un buen entendimiento del uso de pixeles.
 * Se integró un módulo antirrebote que mejora la experiencia de los jugadores al poder permitir una experiencia de juego más precisa y fluida.
-* Pese al éxito del proyectop, se ven oportunidades de mejora en la arquitectura del circuito análogo y el uso de una pantalla diferente para la visualización del juego, con el fin de mejorar la calidad y portabilidad del dispositivo.
+* Pese al éxito del proyecto, se ven oportunidades de mejora en la arquitectura del circuito análogo y el uso de una pantalla diferente para la visualización del juego, con el fin de mejorar la calidad y portabilidad del dispositivo.
