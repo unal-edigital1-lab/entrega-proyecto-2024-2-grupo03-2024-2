@@ -493,4 +493,8 @@ module debounce (
 endmodule
 
 ````
+# Circuito análogo
 
+A continuación se muestra el circuito de los dos controles de jugador y el control del juego.
+
+![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Circuito%20Analogo%20Digital.jpg)
