@@ -118,3 +118,5 @@ El movimiento de la pelota se realizó de la siguiente forma:
     end
 
 ````
+
+El código en Verilog implementa la lógica de animación y colisión de una pelota en un entorno de juego mediante un bloque secuencial controlado por el flanco de subida del reloj clk_pix. Inicialmente, si el juego está en estado de inicio (INIT o START), la pelota se posiciona en el centro de la pantalla y se reinician sus valores de dirección y colisión. Durante la animación, si la pelota impacta una de las paletas, su dirección horizontal cambia dependiendo del lado de la colisión, y su dirección vertical se ajusta según la posición relativa de la pelota con respecto a la paleta. Asimismo, si la pelota alcanza los límites de la pantalla, se activan las señales de colisión lft_col o rgt_col, lo que indica que se ha anotado un punto. En caso contrario, la pelota continúa su trayectoria en función de su dirección actual. De esta manera, el código permite la simulación del movimiento de la pelota dentro de los límites del juego, asegurando su interacción con las paletas y los bordes de la pantalla.
