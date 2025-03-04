@@ -64,20 +64,57 @@ El periférico de los botones da 2 señales de entrada, cada vez que uno de los 
 
 
 ## Comportamiento independiente:
+
 ### Rebote de la pelota: 
 Hay 2 componentes en la velocidad de la pelota, los cuales cambian segun la magnitud de la velocidad y el valor de la direccion, el valor de la direccion determina si el valor de la velocidad de la pelota es sumado o restado de la posición xy actual.
-### Ángulo/física para cambio de las velocidades de la pelota con la paleta: 
-Según el intervalo en el que la pelota golpeé la paleta se le darán valores de velocidad xy diferentes para que no se vuelva predecible
-### Aumento de dificultad: 
-Multiplicar por 2 los valores de xy cada 10 puntos. X2, X4, x6 etc con el objetivo de hacer el juego más desafiante.
-### Pérdida de vidas: 
-Comparar el valor x de la pelota con el de la paleta, si es menr al de la paleta se reduce el contador de vidas en uno y se reescriben los valores de velocidad y posicion (pero no el de direccion)
+
+### Cambio de la velocidad de la pelota con la paleta: 
+La pelota aumentará su magnitud de velocidad cada rebotes con paletas.
+
 ### Registro de puntaje: 
-Cada vez que el valor de x de la pelota sea igual al de la paleta y el valor y este en el intervalo en el que está la paleta se suma un punto al puntaje, cada vez que esto ocurre se compara el número del puntaje con el del puntaje máximo, y en caso de que el puntaje máximo sea menor este se sobreescribe con el puntaje actual.
+Cada vez que la pelota toque uno de los bordes laterales de la pantalla, se sumará un punto al contador de puntaje de ese jugador. Ambos puntajes serán mostrados en todo momento.
 
+# Análisis del código
 
+## Movimiento de la pelota
 
-## plan de trabajo acordado con el profesor 
+El movimiento de la pelota se realizó de la siguiente forma:
 
-# semana 1
-1. diseño driver pantalla ili9341 se recomienda usar lo trabajado de los  grupos de 2024-1
+```` verilog
+// animacion pelota
+    always_ff @(posedge clk_pix) begin
+        if (state ==INIT || state == START) begin  // reset posición pelota
+            bx <= (H_RES - B_SIZE) >> 1;
+            by <= (V_RES - B_SIZE) >> 1;
+            dx <= 0;
+            dy <= ~dy;
+            lft_col <= 0;
+            rgt_col <= 0;
+        end else if (animate && state != POINT_END) begin
+            if (p1_col) begin  // colicion con paleta izq
+                dx <= 0;
+                bx <= bx + spx;
+                dy <= (by + B_SIZE/2 < p1y + P_H/2) ? 1 : 0;
+            end else if (p2_col) begin  // colicion con paleta izq der 
+                dx <= 1;
+                bx <= bx - spx;
+                dy <= (by + B_SIZE/2 < p1y + P_H/2) ? 1 : 0;
+					 //led_2 <= 1;
+					 //led_1 <= 0;
+            end else if (bx >= H_RES - (spx + B_SIZE)) begin  // borde der
+                rgt_col <= 1;
+            end else if (bx < spx) begin  // borde izq
+                lft_col <= 1;
+            end else bx <= (dx) ? bx - spx : bx + spx;
+
+            if (by >= V_RES - (spy + B_SIZE)) begin  // borde inf
+                dy <= 1;
+                by <= by - spy;
+            end else if (by < spy) begin  // borde sup
+                dy <= 0;
+                by <= by + spy;
+            end else by <= (dy) ? by - spy : by + spy;
+        end
+    end
+
+````
