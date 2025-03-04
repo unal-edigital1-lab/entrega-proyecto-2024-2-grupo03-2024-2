@@ -1,17 +1,30 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=17798990&assignment_repo_type=AssignmentRepo)
-# Entrega 1 del proyecto WP01
+# Entrega Final del Proyecto Pong
 
 Proyecto Electrónica Digital 2024-2 Grupo 3
 
 Juan Esteban Otavo García
 
 
-Detalles generales:
-El proyecto de curso para este semestre es la creación de un juego de PONG de dos jugadores en una FPGA con un sistema de puntaje, cambio de dificultad y multiples vidas.
+# Planteamiento del Problema
 
-# Especificaciones del sistema:
-Hardware: El prototipo será creado usando una FPGA Cyclone V, una pantalla usando protocolo VGA, dos botones por jugador para el control de las paletas y dos botones extra para control de la partida y refrescar la pantalla en caso de bugs visuales.
-# Software: El prototipo debe realizar estas funciones para que se pueda considerar como funcional:
+Se propuso implementar en la FPGA el clásico videojuego Pong. El video juego consiste en dos jugadores que se enfrentan entre sí, moviendo una paleta cada uno y evitando que la pelota caiga en su lado. El prototipo será creado usando una FPGA Cyclone V, una pantalla usando protocolo VGA, dos botones por jugador para el control de las paletas y dos botones extra para control de la partida y refrescar la pantalla en caso de bugs visuales.
+
+Para realizar esta implementación se requería de realizar un dispositivo que permitiera jugar a dos jugadores entre sí, llevar un sistema de conteo, cambiar las condiciones de juego a lo largo de la partida y reiniciar el juego con la pulsación de un botón. Por la naturaleza del proyecto fue necesario estudiar principalmente máquinas de estado, ya que el funcionamiento principal de este juego requiere cambiar entre varios estados.
+ 
+## Requisitos funcionales
+
+* Sistema de control de paletas para dos jugadores
+* Sistema de conteo de puntuación
+* Control de reinicio
+
+# Análisis de diseño
+
+## Selección de pantalla
+
+Al principio, se tenía pensado trabajar con una pantalla  LCD ILI9341, pero por temas de fácilidad a la hora de encontrar información en línea se optó por trabajar con protocolo VGA.
+
+
 ## Inicio/reinicio: 
 El juego debe permitir que el jugador decida en que momento se da el inicio y el reinicio, por lo que se va a programar mediante un botón.
 ## Operación: 
