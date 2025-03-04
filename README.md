@@ -281,3 +281,47 @@ module char_gen (
 endmodule
 
 ````
+Finalmente, se muestra la implementación del módulo char_gen y la lógica de como se aumenta el puntaje de jugador
+```` verilog
+// Instanciación del módulo char_gen
+	logic score_p1_pixel, score_p2_pixel;
+
+	char_gen char_p1 (
+		 .clk_pix(clk_pix),
+		 .sx(sx),
+		 .sy(sy),
+		 .digit(score_p1),
+		 .char_x(SCORE_X_P1),
+		 .char_y(SCORE_Y),
+		 .pixel(score_p1_pixel)
+	);
+
+	char_gen char_p2 (
+		 .clk_pix(clk_pix),
+		 .sx(sx),
+		 .sy(sy),
+		 .digit(score_p2),
+		 .char_x(SCORE_X_P2),
+		 .char_y(SCORE_Y),
+		 .pixel(score_p2_pixel)
+	);
+	
+// Actualización de la puntuación
+	always_ff @(posedge clk_pix) begin
+		 if (state == PLAY) begin
+			  if (lft_col) score_p2 <= score_p2 + 1;  // Jugador 2 anota
+			  if (rgt_col) score_p1 <= score_p1 + 1;  // Jugador 1 anota
+			  if (score_p2 == 10)begin
+			  score_p2 <= 0 ; 
+			  score_p1 <= 0;
+			  end
+			  if (score_p1 == 10) begin
+			  score_p1 <= 0; 
+			  score_p2 <= 0 ; 
+			  end
+		 end
+	end
+
+
+
+````
