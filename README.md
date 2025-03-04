@@ -498,3 +498,6 @@ endmodule
 A continuación se muestra el circuito de los dos controles de jugador y el control del juego.
 
 ![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Circuito%20Analogo%20Digital.jpg)
+
+Para todos los botones se usaron pulsadores normalmente abiertos, el botón de control de refresco de la pantalla en caso de bugs visuales debió ser un pulsador normalmente cerrado, pero
+por temas externos se improvisó el mismo efecto invirtiendo las resistencias.
