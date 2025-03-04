@@ -520,7 +520,7 @@ A continuación, se muestra la relación de las salidas con la función que cump
 
 Para el circuito análogo se intento dar la impresión de dos controles y una consola, el circuito soldado se muestra a continuación:
 
-Insertar foto del circuito
+![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Circuito%20analogo%20final.jpeg)
 
 ## Conexiones en la fpga
 
@@ -528,7 +528,7 @@ Finalmente, se muestran las conexiones en la fpga y el circuito montado por comp
 
 ![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Conexiones%20fpga.jpeg)
 
-Insertar foto del circuito completo
+![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Circuito%20conectado%20fpga.jpeg)
 
 # Conclusiones del proyecto
 
