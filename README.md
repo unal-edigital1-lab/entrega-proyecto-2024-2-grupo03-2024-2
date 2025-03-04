@@ -3,20 +3,21 @@
 
 Proyecto Electrónica Digital 2024-2 Grupo 3
 
-Juan Esteban Otavo, Alejandro Ramirez, Nicolas Orjuela
+Juan Esteban Otavo García
+
 
 Detalles generales:
-El proyecto de curso para este semestre es la creación de un juego de PONG de un solo jugador en una FPGA con un sistema de puntaje, cambio de dificultad y multiples vidas.
+El proyecto de curso para este semestre es la creación de un juego de PONG de dos jugadores en una FPGA con un sistema de puntaje, cambio de dificultad y multiples vidas.
 
 # Especificaciones del sistema:
-Hardware: El prototipo será creado usando una FPGA Cyclone V, una pantalla LCD ILI9341, un joystick anologico XY KY-023, y fuentes y cableado con 
+Hardware: El prototipo será creado usando una FPGA Cyclone V, una pantalla usando protocolo VGA, dos botones por jugador para el control de las paletas y dos botones extra para control de la partida y refrescar la pantalla en caso de bugs visuales.
 # Software: El prototipo debe realizar estas funciones para que se pueda considerar como funcional:
 ## Inicio/reinicio: 
-Con la entrada adecuada el juego se va a reiniciar del todo, restaurando el número de vidas del jugador y borrando tanto el puntaje actual como el puntaje más alto.
+El juego debe permitir que el jugador decida en que momento se da el inicio y el reinicio, por lo que se va a programar mediante un botón.
 ## Operación: 
-El control del jugador se limita a definir la posición de la paleta usando el control analógico para subirla y bajarla. 
+El control del jugador se limita a definir la posición de la paleta en el eje Y usando dos botones. 
 ## Comportamiento independiente: 
-Cada vez que el juego se inicie (o se pierda una vida) la pelota será colocada en el centro de la pantalla, llevando la dirección previa (o una dirección positiva en xy en caso de que el videojuego haya sido reiniciado recientemente) y con una velocidad predeterminada, la pelota rebotara en cada muro que toque, manteniendo su dirección en el componente paralelo al muro e invirtiendo la dirección perpendicular al mismo, detrás de la paleta no hay un muro. Cada vez que la pelota toque la paleta el puntaje aumenta en 1. Cada vez que la pelota llegue al área detrás de la paleta el jugador perderá una vida y se reiniciara su puntaje, una vez el jugador pierde todas sus vidas (empezando con un número predeterminado) se acabara el juego, más allá de este punto la única interacción posible será reiniciar el juego.
+Cada vez que el juego se reinicie la pelota será colocada en el centro de la pantalla, posteriormente será disparada con un ángulo variable y una velocidad predeterminada, la pelota rebotara en los bordes horizontales de la pantalla, reflejando su posición, manteniendo su dirección en el componente paralelo al muro e invirtiendo la dirección perpendicular al mismo, detrás de la paleta no hay un muro. Cada vez que la pelota toque la paleta el puntaje aumenta en 1. Cada vez que la pelota llegue al área detrás de la paleta el jugador perderá una vida y se reiniciara su puntaje, una vez el jugador pierde todas sus vidas (empezando con un número predeterminado) se acabara el juego, más allá de este punto la única interacción posible será reiniciar el juego.
 ## Registro de puntaje: 
 El juego mostrará el puntaje que se logre en la vida actual, en caso de que dicho puntaje supere al mejor puntaje previo este va a sobrescribir al puntaje más alto.
 
