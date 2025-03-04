@@ -501,3 +501,14 @@ A continuación se muestra el circuito de los dos controles de jugador y el cont
 
 Para todos los botones se usaron pulsadores normalmente abiertos, el botón de control de refresco de la pantalla en caso de bugs visuales debió ser un pulsador normalmente cerrado, pero
 por temas externos se improvisó el mismo efecto invirtiendo las resistencias.
+
+A continuación, se muestra la relación de las salidas con la función que cumplen en las entradas del circuito:
+
+| Número de salida  | Entrada al circuito digital |
+| ------------- | ------------- |
+| Vout  | Jugador1_arriba  |
+| Vot2  | Jugador1_abajo |
+| Vot3  | Start  |
+| Vot4  | Refresco de pantalla  |
+| Vot5  | Jugador2_arriba |
+| Vot6  | Jugador2_abajo  |
