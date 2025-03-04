@@ -529,3 +529,11 @@ Finalmente, se muestran las conexiones en la fpga y el circuito montado por comp
 ![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Conexiones%20fpga.jpeg)
 
 Insertar foto del circuito completo
+
+# Conclusiones del proyecto
+
+* Gracias al desarrollo de esta implementación de Pong se afianzaron conocimientos clave en uso de máquinas de estado y dibujo de pixeles mediante protocolo VGA, aprovechando la materia para replicar el clásico juego de Pong.
+* A la hora de trabajar con pixeles, se debe ser muy preciso con las operaciones que se realizan, además de manejar las impedancias con cuidado ya que pueden generar bugs visuales, como pixeles parpadeantes donde deberían estar apagados y similares.
+* Se diseño un algoritmo eficiente y simple para detectar las colisiones de la bola, demostrando un buen entendimiento del uso de pixeles.
+* Se integró un módulo antirrebote que mejora la experiencia de los jugadores al poder permitir una experiencia de juego más precisa y fluida.
+* Pese al éxito del proyectop, se ven oportunidades de mejora en la arquitectura del circuito análogo y el uso de una pantalla diferente para la visualización del juego, con el fin de mejorar la calidad y portabilidad del dispositivo.
