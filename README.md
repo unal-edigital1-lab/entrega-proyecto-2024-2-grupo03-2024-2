@@ -401,6 +401,31 @@ Finalmente, se muestra el llamado del módulo en el archivo top y la lógica de 
 	);
 ````
 
+
+## Control de velocidad de la pelota
+
+Para la velocidad de la pelota se propuso que aumentara cada 5 colisiones con alguna de las paletas. El código utilizado para gestionar los cambios de velocidad se muestra a continuación:
+
+```` verilog
+// control de velocidad de la pelota
+    localparam SPEED_STEP = 5;  // cantidad de coliciones para aumento de velocidad
+    logic [$clog2(SPEED_STEP)-1:0] cnt_sp;  // velocimetro
+    always_ff @(posedge clk_pix) begin
+        if (state == START) begin  // velocidad inicial
+            spx <= 3;
+            spy <= 1;
+        end else if (state == PLAY && animate && (p1_col || p2_col)) begin
+            if (cnt_sp == SPEED_STEP-1) begin
+                spx <= spx + 1;
+                spy <= spy + 1;
+                cnt_sp <= 0;
+            end else begin
+                cnt_sp <= cnt_sp + 1;
+            end
+        end
+    end
+````
+
 ## Máquina de estados
 
 A continuación se muestra el código de la máquina de estados descrita anteriormente:
