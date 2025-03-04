@@ -118,5 +118,102 @@ El movimiento de la pelota se realizó de la siguiente forma:
     end
 
 ````
+Primero se utiliza un bloque secuencial que se ejecuta en cada flanco de subida del reloj clk_pix, actualizando la posición y dirección de la pelota. En los estados INIT y START, la pelota se posiciona en el centro de la pantalla, con bx y by calcuados a partir de resolución horizontal establecida H_RES y V_RES y el tamaño de la pelota que está dado por B_SIZE.  Durante la animación si la pelota impacta una de las paletas su dirección horizontal cambia dependiendo del lado de la colisión y su dirección vertical se ajusta según la posición relativa de la pelota con respecto a la paleta. Asimismo, si la pelota alcanza los límites de la pantalla, se activan las señales de colisión lft_col o rgt_col, lo que indica que se ha anotado un punto. En caso contrario, la pelota continúa su trayectoria en función de su dirección actual.
 
-El código en Verilog implementa la lógica de animación y colisión de una pelota en un entorno de juego mediante un bloque secuencial controlado por el flanco de subida del reloj clk_pix. Inicialmente, si el juego está en estado de inicio (INIT o START), la pelota se posiciona en el centro de la pantalla y se reinician sus valores de dirección y colisión. Durante la animación, si la pelota impacta una de las paletas, su dirección horizontal cambia dependiendo del lado de la colisión, y su dirección vertical se ajusta según la posición relativa de la pelota con respecto a la paleta. Asimismo, si la pelota alcanza los límites de la pantalla, se activan las señales de colisión lft_col o rgt_col, lo que indica que se ha anotado un punto. En caso contrario, la pelota continúa su trayectoria en función de su dirección actual. De esta manera, el código permite la simulación del movimiento de la pelota dentro de los límites del juego, asegurando su interacción con las paletas y los bordes de la pantalla.
+## Detección de colisiones con las paletas
+
+El código se muestra a continuación:
+
+
+```` verilog
+// Detección de colición de las paletas
+    always_ff @(posedge clk_pix) begin
+        if (animate) begin
+            p1_col <= 0;
+            p2_col <= 0;
+        end else if (b_draw) begin
+            if (p1_draw) p1_col <= 1;
+            if (p2_draw) p2_col <= 1;
+        end
+    end
+
+````
+Una colisión es detectada si se tiene que dibujar la pelota y también tiene que dibujar una de las paletas en pixeles repetidos. Para esto, se utiliza el clock de pixeles y se verifica en cada subida.
+
+## Movimiento de las paletas
+
+El código se muestra a continuación:
+
+```` verilog
+always_ff @(posedge clk_pix) begin
+        if (state == START) begin  // reinicia posición de las paletas
+            p1y <= (V_RES - P_H) >> 1;
+            p2y <= (V_RES - P_H) >> 1;
+        end else if (animate && state != POINT_END) begin
+            if (state == PLAY) begin
+					if(!move_dn && !move_up)begin
+						p1y <= p1y;
+					end
+					
+					if (!move_up) begin
+						if (move_dn) begin
+								if (p1y < aux)begin
+									p1y <= p1y + P_SP;
+								end
+						end
+					end
+					
+					if (move_up && !move_dn) begin		// paleta jugador 1
+								if (p1y > P_SP) begin 
+									p1y <= p1y - P_SP; 
+								end
+					end
+						
+					if(!move_dn_p2 && !move_up_p2)begin
+						p2y <= p2y;
+					end
+					 
+					if (!move_up_p2) begin
+						if (move_dn_p2) begin
+								if (p2y < aux)begin
+									p2y <= p2y + P_SP;
+								end
+						end
+					end
+					
+					if (move_up_p2 && !move_dn_p2) begin		// paleta jugador 2
+								if (p2y > P_SP) begin 
+									p2y <= p2y - P_SP; 
+								end
+					end
+				  end
+        end
+    end
+````
+
+La lógica del movimiento de las paletas se planteó de forma que en el momento que el jugador presione uno de los dos botones de movimiento (Arriba o abajo), se enviara un 1 lógico y la paleta se empezara a mover en dicha dirección. Fue necesario agregar una condición que no permita que las paletas se salgan de la pantalla.
+
+## Generación de señal VGA
+
+Para la señal VGA se requiere utilizar dos variables para la sincronización vertical y horizontal (hsync, vsync). Además, dos variables que indican la posición actual de un pixel en la pantalla. Se utilizó una resolución de 640x480 pixeles y una tasa de refresco de 60Hz debido al estándar VGA. Finalmente, por limitaciones de la FPGA utilizada se utilizó un código RGB111 para los colores de los pixeles. La asignación de colores se muestra a continuación:
+
+```` verilog
+// Generación de colores
+	logic [2:0] rgb;
+	always_comb begin
+		 if (press_start_pixel && (state== INIT  ||  state== POINT_END ||  state== IDLE)) begin
+			  rgb <= 3'b111;  // Color del texto "PRESS START" (blanco)
+		 end else if (de && b_draw && (state == START || state== PLAY|| state== POINT_END)) begin
+			  rgb <= 3'b100;  // Color de la pelota (rojo)
+		 end else if (de && p1_draw &&(state == START || state== PLAY|| state== POINT_END)) begin
+			  rgb <= 3'b010;  // Color de la paleta 1 (verde)
+		 end else if (de && p2_draw &&(state == START || state== PLAY|| state== POINT_END)) begin
+			  rgb <= 3'b001;  // Color de la paleta 2 (azul)
+		 end else if (de && (score_p1_pixel || score_p2_pixel) &&(state == START || state== PLAY || state== POINT_END)) begin
+			  rgb <= 3'b111;  // Color del marcador (blanco)
+		 end else begin
+			  rgb <= 3'b000;  // Fondo (negro)
+		 end
+	end
+
+````
