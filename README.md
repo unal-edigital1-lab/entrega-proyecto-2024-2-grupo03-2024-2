@@ -22,17 +22,28 @@ Para realizar esta implementación se requería de realizar un dispositivo que p
 
 ## Selección de pantalla
 
-Al principio, se tenía pensado trabajar con una pantalla  LCD ILI9341, pero por temas de fácilidad a la hora de encontrar información en línea se optó por trabajar con protocolo VGA.
-
+Al principio, se tenía pensado trabajar con una pantalla LCD ILI9341, pero por temas de fácilidad a la hora de encontrar información en línea se optó por trabajar con protocolo VGA.
 
 ## Inicio/reinicio: 
 El juego debe permitir que el jugador decida en que momento se da el inicio y el reinicio, por lo que se va a programar mediante un botón.
+
+
 ## Operación: 
 El control del jugador se limita a definir la posición de la paleta en el eje Y usando dos botones. 
+
+
 ## Comportamiento independiente: 
-Cada vez que el juego se reinicie la pelota será colocada en el centro de la pantalla, posteriormente será disparada con un ángulo variable y una velocidad predeterminada, la pelota rebotara en los bordes horizontales de la pantalla, reflejando su posición, manteniendo su dirección en el componente paralelo al muro e invirtiendo la dirección perpendicular al mismo, detrás de la paleta no hay un muro. Cada vez que la pelota toque la paleta el puntaje aumenta en 1. Cada vez que la pelota llegue al área detrás de la paleta el jugador perderá una vida y se reiniciara su puntaje, una vez el jugador pierde todas sus vidas (empezando con un número predeterminado) se acabara el juego, más allá de este punto la única interacción posible será reiniciar el juego.
+Cada vez que el juego se reinicie la pelota será colocada en el centro de la pantalla, posteriormente será disparada con un ángulo variable (reflejo) y una velocidad predeterminada, la pelota rebotara en los bordes horizontales de la pantalla, reflejando su posición, manteniendo su dirección en el componente paralelo al muro e invirtiendo la dirección perpendicular al mismo, detrás de las paletas no hay muros. Cada vez que la pelota toque el borde lateral del rival, el puntaje aumenta en 1 y se debe poder reiniciar el juego.
+
 ## Registro de puntaje: 
-El juego mostrará el puntaje que se logre en la vida actual, en caso de que dicho puntaje supere al mejor puntaje previo este va a sobrescribir al puntaje más alto.
+El juego mostrará el puntaje de los dos jugadores en tiempo real
+
+## Diagrama de estados
+El sistema contará con la máquina de estados que será mostrada a continuación:
+
+Poner diagrama máquina de estados
+
+En el estado INIT se inicializarán las variables del sistema, los jugadores no ven esta inicialización, posteriormente pasa a Menu, el cual es un estado estático. Al presionar el botón de control, el sistema debe pasar al estado START, en el que los jugadores se preparan para iniciar a jugar. Posteriormente, al volver a presional el botón de control el sistema debe pasar al estado PLAY, en el que la pelota se empieza a mover, este estado se mantiene hasta que la pelota choca con uno de los bordes laterales de la pantalla, donde pasa al estado END, el cual también es un estado estático. Para volver a jugar, el usuario puede presionar el botón de control y pasará del estado END hasta el estado START nuevamente.
 
 # Arquitectura inicial:
 A continuación se va a mostrar una idea preliminar de los datos y formas en las que se cumplirán las funciones mencionadas previamente:
