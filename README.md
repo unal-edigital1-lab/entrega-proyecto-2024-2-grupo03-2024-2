@@ -215,5 +215,12 @@ Para la señal VGA se requiere utilizar dos variables para la sincronización ve
 			  rgb <= 3'b000;  // Fondo (negro)
 		 end
 	end
+	
+	//output pins
+	 assign dvi_r = rgb[2];
+	 assign dvi_g = rgb[1];
+	 assign dvi_b = rgb[0];
+	 assign dvi_hsync = hsync;
+	 assign dvi_vsync = vsync;
 
 ````
