@@ -41,7 +41,7 @@ El juego mostrará el puntaje de los dos jugadores en tiempo real
 ## Diagrama de estados
 El sistema contará con la máquina de estados que será mostrada a continuación:
 
-Poner diagrama máquina de estados
+![image](https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo03-2024-2/blob/main/src/images/Maquinadeestados.png)
 
 En el estado INIT se inicializarán las variables del sistema, los jugadores no ven esta inicialización, posteriormente pasa a Menu, el cual es un estado estático. Al presionar el botón de control, el sistema debe pasar al estado START, en el que los jugadores se preparan para iniciar a jugar. Posteriormente, al volver a presional el botón de control el sistema debe pasar al estado PLAY, en el que la pelota se empieza a mover, este estado se mantiene hasta que la pelota choca con uno de los bordes laterales de la pantalla, donde pasa al estado END, el cual también es un estado estático. Para volver a jugar, el usuario puede presionar el botón de control y pasará del estado END hasta el estado START nuevamente.
 
